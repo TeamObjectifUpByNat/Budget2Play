@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Budget2Play – Équipements & Budget par niveau</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Calculez le coût précis pour démarrer un sport selon votre niveau et découvrez les équipements nécessaires.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="sb-topnav">
+    <div class="sb-nav-inner">
+      <a href="#" class="sb-nav-logo" data-section="home">Budget2Play</a>
+      <ul class="sb-nav-menu">
+        <li><a href="#" data-section="home">Accueil</a></li>
+        <li><a href="#" data-section="estimator">Estimateur</a></li>
+        <li><a href="#" data-section="offers">Offres</a></li>
+        <li><a href="#" data-section="about">À propos</a></li>
+        <li><a href="#" data-section="legal">Mentions légales</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ACCUEIL / HERO -->
+  <header id="home" class="sb-hero">
+    <div class="sb-hero-inner">
+      <h1>SportBudget devient <span class="brand-accent">Budget2Play</span></h1>
+      <p>Découvre l’équipement qu’il te faut pour démarrer n’importe quel sport — selon ton niveau, ton budget, et ton âge.</p>
+      <a href="#" class="sb-btn-primary sb-hero-cta" data-section="estimator">Commencer mon estimation</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ESTIMATEUR -->
+    <section id="estimator" class="sb-section hidden">
+      <div class="sb-container">
+        <!-- FORMULAIRE -->
+        <form id="sb-form" class="sb-card" novalidate>
+          <h2>Votre profil</h2>
+
+          <!-- Sport -->
+          <div class="sb-field">
+            <label for="sport">Sport</label>
+            <select id="sport" required>
+              <option value="">-- Sélectionnez --</option>
+
+              <option value="athletics">Athlétisme (piste / club)</option>
+              <option value="aviron">Aviron</option>
+              <option value="badminton">Badminton</option>
+              <option value="baseball">Baseball / Softball</option>
+              <option value="basketball">Basketball</option>
+              <option value="bmx">BMX</option>
+              <option value="canoe">Canoë / Kayak</option>
+              <option value="running">Course à pied</option>
+              <option value="cycling">Cyclisme</option>
+              <option value="escalade">Escalade</option>
+              <option value="escrime">Escrime</option>
+              <option value="fitness">Fitness / Musculation</option>
+              <option value="golf">Golf</option>
+              <option value="gymnastique">Gymnastique</option>
+              <option value="handball">Handball</option>
+              <option value="hockey">Hockey sur gazon</option>
+              <option value="judo">Judo</option>
+              <option value="natation">Natation</option>
+              <option value="rugby">Rugby</option>
+              <option value="skateboard">Skateboard</option>
+              <option value="surf">Surf</option>
+              <option value="taekwondo">Taekwondo</option>
+              <option value="tennis">Tennis</option>
+              <option value="pingpong">Tennis de table</option>
+              <option value="archery">Tir à l’arc</option>
+              <option value="triathlon">Triathlon</option>
+              <option value="voile">Voile</option>
+              <option value="volleyball">Volley-ball</option>
+              <option value="vtt">VTT</option>
+            </select>
+          </div>
+
+          <!-- Niveau -->
+          <div class="sb-field">
+            <label for="niveau">Niveau</label>
+            <select id="niveau" required>
+              <option value="debutant">Débutant</option>
+              <option value="intermediaire">Intermédiaire</option>
+              <option value="avance">Avancé</option>
+            </select>
+          </div>
+
+          <!-- Budget -->
+          <div class="sb-field">
+            <label for="budget">Budget max (€) (optionnel)</label>
+            <input type="number" id="budget" min="0" placeholder="Ex : 600" />
+          </div>
+
+          <!-- Âge -->
+          <div class="sb-field">
+            <label for="age">Âge (optionnel)</label>
+            <input type="number" id="age" min="1" max="120" placeholder="Ex : 16" />
+          </div>
+
+          <button type="submit" class="sb-btn-primary">Afficher mes équipements</button>
+        </form>
+
+        <!-- RÉSULTATS -->
+        <section id="sb-results" class="sb-card sb-results hidden">
+          <h2>Équipements recommandés</h2>
+          <p id="sb-results-intro"></p>
+          <div id="sb-equip-list" class="sb-equip-grid"></div>
+          <div id="sb-total-wrapper" class="sb-total-wrapper hidden">
+            <hr />
+            <p class="sb-total-label">Total estimé :</p>
+            <p id="sb-total-amount" class="sb-total-amount"></p>
+            <p id="sb-budget-warning" class="sb-budget-warning hidden"></p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- OFFRES -->
+    <section id="offers" class="sb-section hidden">
+      <div class="sb-container">
+        <div class="sb-card">
+          <h2>Bons de réduction & Offres</h2>
+          <p>Ici tu pourras retrouver tous les codes promos négociés avec nos partenaires (Décathlon, Ekoi, Budostore…).</p>
+          <ul class="sb-offers-list">
+            <li><strong>Code TEST10</strong> – -10% sur matériel débutant (exemple).</li>
+            <li><strong>Code VTT20</strong> – -20€ sur VTT entrée de gamme (exemple).</li>
+          </ul>
+          <p class="sb-muted small">Section à compléter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="about" class="sb-section hidden">
+      <div class="sb-container">
+        <div class="sb-card">
+          <h2>Qui sommes-nous ?</h2>
+          <p><strong>Budget2Play</strong> (anciennement SportBudget) est un outil étudiant créé pour aider tout le monde à démarrer un sport sans surprise côté budget.</p>
+          <p>Tu sélectionnes un sport, ton niveau, et on te liste l’équipement essentiel avec estimation de coût. Nous travaillons à des partenariats pour te faire économiser avec des codes promos.</p>
+          <p class="sb-muted small">Projet étudiant – version prototype.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENTIONS LÉGALES -->
+    <section id="legal" class="sb-section hidden">
+      <div class="sb-container">
+        <div class="sb-card">
+          <h2>Mentions légales</h2>
+          <p>Prototype en développement. Aucune vente directe. Les achats sont effectués auprès de partenaires tiers.</p>
+          <h3>Éditeur</h3>
+          <p>Nathan (projet étudiant). Ajouter infos lorsque structure légale créée.</p>
+          <h3>Données</h3>
+          <p>Nous ne stockons pas encore de données personnelles. En phase bêta.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="sb-footer">
+    <p>© 2025 Budget2Play – Prototype éducatif.</p>
+  </footer>
+
+  <!-- DONNÉES puis LOGIQUE -->
+  <script src="equipment-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
