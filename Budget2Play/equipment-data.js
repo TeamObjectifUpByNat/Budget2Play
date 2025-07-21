@@ -8,11 +8,13 @@
    ============================================================ */
 
 window.SPORTS_EQUIPMENT = [
-  {
+   {
     id: "cycling",
     label: "Cyclisme",
-    ageMin: 12,   // indicatif
+    ageMin: 12,
     ageMax: 99,
+    license:     { junior: 80, adult: 140 },
+    competition: { junior: 8,  adult: 20 },
     profiles: {
       debutant: [
         { item: "Vélo route entrée de gamme", price: 500, img: "images/placeholder-bike.jpg", link: "#" },
@@ -43,6 +45,8 @@ window.SPORTS_EQUIPMENT = [
     label: "Course à pied",
     ageMin: 8,
     ageMax: 99,
+    license:     { junior: 200, adult: 250 },
+    competition: { junior: 10,  adult: 20 },
     profiles: {
       debutant: [
         { item: "Chaussures running basiques", price: 60, img: "images/placeholder-shoes.jpg", link: "#" },
@@ -67,6 +71,8 @@ window.SPORTS_EQUIPMENT = [
     label: "Fitness / Musculation maison",
     ageMin: 12,
     ageMax: 99,
+    license:     { junior: 175, adult: 250 },
+    competition: { junior: 0,  adult: 0 },
     profiles: {
       debutant: [
         { item: "Kit haltères réglables (10kg)", price: 40, img: "images/placeholder-dumbbell.jpg", link: "#" },
@@ -91,6 +97,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Natation",
   ageMin: 4,
   ageMax: 99,
+    license:     { junior: 300, adult: 400 },
+    competition: { junior: 30,  adult: 60 },
   profiles: {
     debutant: [
       { item:"Maillot bain débutant", price:20, img:"images/natation1.jpg", link:"#"},
@@ -117,6 +125,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Tir à l’arc",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 120, adult: 155 },
+    competition: { junior: 10,  adult: 20 },
   profiles: {
     debutant: [
       { item: "Arc classique débutant (club ou kit)", price: 120, img: "images/archery-kit.jpg", link: "#" },
@@ -144,6 +154,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Athlétisme (piste / club)",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 250, adult: 250 },
+    competition: { junior: 10,  adult: 20 },
   profiles: {
     debutant: [
       { item: "Chaussures running polyvalentes", price: 60, img: "images/athletics-shoes.jpg", link: "#" },
@@ -170,6 +182,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Badminton",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 100, adult: 200 },
+    competition: { junior: 10,  adult: 20 },
   profiles: {
     debutant: [
       { item: "Raquette loisir", price: 25, img: "images/bad-loisir.jpg", link: "#" },
@@ -197,6 +211,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Baseball / Softball",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 150, adult: 200 },
+    competition: { junior: 15,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Gant entrée de gamme", price: 40, img: "images/baseball-glove.jpg", link: "#" },
@@ -224,6 +240,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Basketball",
   ageMin: 6,
   ageMax: 99,
+    license:     { junior: 150, adult: 300 },
+    competition: { junior: 10,  adult: 30 },
   profiles: {
     debutant: [
       { item: "Ballon outdoor caoutchouc", price: 20, img: "images/basket-ball1.jpg", link: "#" },
@@ -254,6 +272,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Canoë / Kayak",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 90, adult: 110 },
+    competition: { junior: 15,  adult: 30 },
   profiles: {
     debutant: [
       { item: "Kayak gonflable 1 place ou sit-on-top", price: 250, img: "images/canoe-basic.jpg", link: "#" },
@@ -287,6 +307,8 @@ window.SPORTS_EQUIPMENT = [
   label: "BMX",
   ageMin: 6,
   ageMax: 99,
+    license:     { junior: 80, adult: 130 },
+    competition: { junior: 20,  adult: 20 },
   profiles: {
     debutant: [
       { item: "BMX loisir acier", price: 250, img: "images/bmx-basic.jpg", link: "#" },
@@ -318,6 +340,8 @@ window.SPORTS_EQUIPMENT = [
   label: "VTT",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 70, adult: 139 },
+    competition: { junior: 8,  adult: 20 },
   profiles: {
     debutant: [
       { item: "VTT loisir (chemins, 26\"/27.5\")", price: 300, img: "images/vtt-basic.jpg", link: "#" },
@@ -350,6 +374,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Escrime",
   ageMin: 10,
   ageMax: 99,
+    license:     { junior: 270, adult: 420 },
+    competition: { junior: 10,  adult: 30 },
   profiles: {
     debutant: [
       { item: "Veste basique non FIE", price: 70, img: "images/escrime-jacket-basic.jpg", link: "#" },
@@ -383,6 +409,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Golf",
   ageMin: 12,
   ageMax: 99,
+    license:     { junior: 250, adult: 400 },
+    competition: { junior: 20,  adult: 50 },
   profiles: {
     debutant: [
       { item: "Demi-série (5 clubs)", price: 250, img: "images/golf-basic.jpg", link: "#" },
@@ -415,6 +443,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Gymnastique",
   ageMin: 5,
   ageMax: 99,
+    license:     { junior: 150, adult: 250 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Tapis gym pliable", price: 50, img: "images/gym-mat-basic.jpg", link: "#" },
@@ -447,6 +477,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Handball",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 125, adult: 250 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Ballon loisir taille 2/3", price: 25, img: "images/handball-basic.jpg", link: "#" },
@@ -477,6 +509,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Hockey sur gazon",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 150, adult: 250 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Crosse bois basique", price: 40, img: "images/hockey-stick-basic.jpg", link: "#" },
@@ -507,6 +541,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Judo",
   ageMin: 5,
   ageMax: 99,
+    license:     { junior: 120, adult: 200 },
+    competition: { junior: 10,  adult: 30 },
   profiles: {
     debutant: [
       { item: "Kimono basique coton", price: 35, img: "images/judo-basic.jpg", link: "#" },
@@ -536,6 +572,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Aviron",
   ageMin: 12,
   ageMax: 99,
+    license:     { junior: 200, adult: 200 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Tenue basique (maillot + cuissard)", price: 50, img: "images/aviron-kit-basic.jpg", link: "#" },
@@ -566,6 +604,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Rugby",
   ageMin: 10,
   ageMax: 99,
+    license:     { junior: 150, adult: 250 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Ballon loisir taille 4/5", price: 25, img: "images/rugby-ball.jpg", link: "#" },
@@ -596,6 +636,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Voile",
   ageMin: 12,
   ageMax: 99,
+    license:     { junior: 200, adult: 400 },
+    competition: { junior: 10,  adult: 30 },
   profiles: {
     debutant: [
       { item: "Gilet de sauvetage 50N", price: 50, img: "images/voile-lifejacket.jpg", link: "#" },
@@ -626,6 +668,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Skateboard",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 100, adult: 200 },
+    competition: { junior: 10,  adult: 20 },
   profiles: {
     debutant: [
       { item: "Planche complète débutant", price: 50, img: "images/skateboard-basic.jpg", link: "#" },
@@ -656,6 +700,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Escalade",
   ageMin: 10,
   ageMax: 99,
+    license:     { junior: 120, adult: 200 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Chaussons d’escalade basiques", price: 50, img: "images/climbing-shoes.jpg", link: "#" },
@@ -686,6 +732,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Surf",
   ageMin: 12,
   ageMax: 99,
+    license:     { junior: 400, adult: 500 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Planche mousse 8’0", price: 200, img: "images/surf-softboard.jpg", link: "#" },
@@ -716,6 +764,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Tennis de table",
   ageMin: 6,
   ageMax: 99,
+    license:     { junior: 65, adult: 150 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Raquette basique", price: 15, img: "images/pingpong-beginner-bat.jpg", link: "#" },
@@ -746,6 +796,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Taekwondo",
   ageMin: 6,
   ageMax: 99,
+    license:     { junior: 120, adult: 200 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Dobok (tenue) basique", price: 30, img: "images/taekwondo-dobok.jpg", link: "#" },
@@ -776,6 +828,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Tennis",
   ageMin: 6,
   ageMax: 99,
+    license:     { junior: 140, adult: 300 },
+    competition: { junior: 15,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Raquette débutant", price: 40, img: "images/tennis-racket-basic.jpg", link: "#" },
@@ -804,6 +858,8 @@ window.SPORTS_EQUIPMENT = [
 {
   id: "triathlon",
   label: "Triathlon",
+    license:     { junior: 200, adult: 350 },
+    competition: { junior: 20,  adult: 40 },
   ageMin: 16,
   ageMax: 99,
   profiles: {
@@ -836,6 +892,8 @@ window.SPORTS_EQUIPMENT = [
   label: "Volley-ball",
   ageMin: 8,
   ageMax: 99,
+    license:     { junior: 120, adult: 200 },
+    competition: { junior: 10,  adult: 25 },
   profiles: {
     debutant: [
       { item: "Ballon loisir", price: 20, img: "images/volleyball-ball-basic.jpg", link: "#" },

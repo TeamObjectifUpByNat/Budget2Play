@@ -1,8 +1,17 @@
 /* ============================================================
    app.js – Budget2Play
    ------------------------------------------------------------
-   - Navigation entre sections (Accueil, Estimateur, Offres, etc.)
-   - Estimation équipements (budget + âge) à partir de window.SPORTS_EQUIPMENT
+   - Navigation entre sections (Accueil, Économisez…, Bons, etc.)
+   - Estimation équipements (budget + âge)
+   - Affiche aussi :
+       • Licence + 1 entraînement/semaine (indicatif club)
+       • Inscriptions compétitions (0 / 5 / 10 par an selon niveau)
+   - Données lues depuis window.SPORTS_EQUIPMENT :
+       license:     { junior:<€>, adult:<€> }
+       competition: { junior:<€> (par compétition), adult:<€> }
+   - Comparaison budget basée sur le TOTAL SAISON (équipement + licence + compétitions)
+   - FIX : masque les blocs Accueil supplémentaires (hero + quick + news)
+     quand on change de section.
    ============================================================ */
 
 (function(){
@@ -16,6 +25,9 @@
     legal: document.getElementById("legal")
   };
 
+  // Tous les blocs de la page d'accueil (hero, accès rapide, news)
+  const homeGroupEls = document.querySelectorAll('.sb-home-group');
+
   const navLinks = document.querySelectorAll('[data-section]');
   navLinks.forEach(link=>{
     link.addEventListener('click', (e)=>{
@@ -26,16 +38,26 @@
   });
 
   function showSection(id){
-    // Hide all
+    // Masquer toutes les sections principales
     Object.keys(sections).forEach(k=>{
       if(sections[k]) sections[k].classList.add('hidden');
     });
-    // Show chosen
+
+    // Masquer ou montrer les blocs Accueil supplémentaires
+    if(id === 'home'){
+      homeGroupEls.forEach(el=>el.classList.remove('hidden'));
+    } else {
+      homeGroupEls.forEach(el=>el.classList.add('hidden'));
+    }
+
+    // Afficher la section demandée
     if(sections[id]) sections[id].classList.remove('hidden');
-    // Update nav active
+
+    // Nav active
     document.querySelectorAll('.sb-nav-menu a').forEach(a=>a.classList.remove('sb-active'));
     const active = document.querySelector('.sb-nav-menu a[data-section="'+id+'"]');
     if(active) active.classList.add('sb-active');
+
     // Scroll top
     window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -54,11 +76,24 @@
   const resultsSection  = document.getElementById("sb-results");
   const resultsIntro    = document.getElementById("sb-results-intro");
   const equipListEl     = document.getElementById("sb-equip-list");
+
   const totalWrapperEl  = document.getElementById("sb-total-wrapper");
-  const totalAmountEl   = document.getElementById("sb-total-amount");
+  const totalAmountEl   = document.getElementById("sb-total-amount");   // Équipement initial
   const budgetWarnEl    = document.getElementById("sb-budget-warning");
 
+  // Lignes injectées dynamiquement (Licence, Compétitions, Total saison)
+  let licenseRowEl      = null;
+  let compRowEl         = null;
+  let seasonRowEl       = null;
+
   const sportsData = window.SPORTS_EQUIPMENT || [];
+
+  // Nombre de compétitions / an selon niveau
+  const COMP_PER_LEVEL = {
+    debutant: 0,
+    intermediaire: 5,
+    avance: 10
+  };
 
   formEl.addEventListener("submit", (e)=>{
     e.preventDefault();
@@ -89,7 +124,7 @@
       ageNote = `⚠ Ce sport est généralement pratiqué entre ${sportData.ageMin} et ${sportData.ageMax} ans (indicatif).`;
     }
 
-    // Récup profil
+    // Récup profil équipement
     const items = (sportData.profiles && sportData.profiles[niveau]) || [];
     if(!items.length){
       showNoData(`Pas (encore) d'équipements listés pour ${sportData.label} au niveau sélectionné.`);
@@ -97,16 +132,13 @@
     }
 
     // Render
-    renderEquipments({sportData, niveau, items, budgetMax, ageNote});
+    renderEquipments({sportData, niveau, items, budgetMax, ageNote, age});
 
-    // Basculer sur les résultats visibles dans l'estimateur
-    if(sections.estimator){
-      showSection('estimator');
-      // Scroll jusqu'aux résultats
-      setTimeout(()=>{
-        resultsSection.scrollIntoView({behavior:'smooth', block:'start'});
-      }, 100);
-    }
+    // Basculer sur la section Estimateur (utile si on venait d'une autre section)
+    showSection('estimator');
+    setTimeout(()=>{
+      resultsSection.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
   });
 
   function showNoData(msg){
@@ -116,18 +148,19 @@
     resultsSection.classList.remove("hidden");
   }
 
-  function renderEquipments({sportData, niveau, items, budgetMax, ageNote}){
+  function renderEquipments({sportData, niveau, items, budgetMax, ageNote, age}){
     const levelLabel = levelToLabel(niveau);
     resultsIntro.innerHTML = `
       <strong>${sportData.label}</strong> – Profil <strong>${levelLabel}</strong>.
       ${ageNote ? `<br>${ageNote}` : ""}`;
 
+    /* ----- ÉQUIPEMENT ----- */
     equipListEl.innerHTML = "";
-    let total = 0;
+    let equipTotal = 0;
 
     items.forEach(obj=>{
       const price = Number(obj.price) || 0;
-      total += price;
+      equipTotal += price;
 
       const card = document.createElement("div");
       card.className = "sb-equip-card";
@@ -145,16 +178,59 @@
       equipListEl.appendChild(card);
     });
 
-    totalAmountEl.textContent = formatEuro(total);
+    /* ----- LICENCE + ENTRAÎNEMENT ----- */
+    const licenseCost = getLicenseCost(sportData, age); // inclut 1 entraînement/semaine (indicatif)
+
+    /* ----- COMPÉTITIONS ----- */
+    const compUnit    = getCompetitionFee(sportData, age); // coût par compétition
+    const comps       = COMP_PER_LEVEL[niveau] ?? 0;
+    const compCost    = compUnit * comps;
+
+    /* ----- TOTAL SAISON ----- */
+    const seasonTotal = equipTotal + licenseCost + compCost;
+
+    /* ----- AFFICHAGES ----- */
+    totalAmountEl.textContent = formatEuro(equipTotal);  // Équipement initial
+
+    // Licence row
+    if(!licenseRowEl){
+      licenseRowEl = document.createElement("p");
+      licenseRowEl.id = "sb-license-cost";
+      licenseRowEl.className = "sb-total-extra";
+      totalWrapperEl.appendChild(licenseRowEl);
+    }
+    licenseRowEl.textContent = `Licence + 1 entraînement/semaine : ${formatEuro(licenseCost)}${licenseCost === 0 ? " (estimé / inclus club)" : ""}`;
+
+    // Compétitions row
+    if(!compRowEl){
+      compRowEl = document.createElement("p");
+      compRowEl.id = "sb-comp-cost";
+      compRowEl.className = "sb-total-extra";
+      totalWrapperEl.appendChild(compRowEl);
+    }
+    compRowEl.textContent = `Inscriptions compétitions (${comps} × ${formatEuro(compUnit)}) : ${formatEuro(compCost)}`;
+
+    // Saison row
+    if(!seasonRowEl){
+      seasonRowEl = document.createElement("p");
+      seasonRowEl.id = "sb-season-total";
+      seasonRowEl.className = "sb-total-extra sb-total-season";
+      seasonRowEl.style.fontWeight = "700";
+      seasonRowEl.style.marginTop = "0.75rem";
+      totalWrapperEl.appendChild(seasonRowEl);
+    }
+    seasonRowEl.textContent = `Total saison (équipement + licence + compétitions) : ${formatEuro(seasonTotal)}`;
+
     totalWrapperEl.classList.remove("hidden");
 
+    /* ----- BUDGET ----- */
     if(budgetMax !== null){
-      if(total > budgetMax){
-        budgetWarnEl.textContent = `⚠ Votre budget (${formatEuro(budgetMax)}) est inférieur au total estimé. Nous vous aiderons à prioriser.`;
+      if(seasonTotal > budgetMax){
+        budgetWarnEl.textContent = `⚠ Votre budget (${formatEuro(budgetMax)}) est inférieur au coût total estimé de la saison (${formatEuro(seasonTotal)}). Nous vous aiderons à prioriser.`;
         budgetWarnEl.classList.remove("hidden");
         budgetWarnEl.style.color = "var(--sb-danger)";
       } else {
-        budgetWarnEl.textContent = `👍 Votre budget couvre ce pack.`;
+        budgetWarnEl.textContent = `👍 Votre budget couvre ce coût de saison estimé (${formatEuro(seasonTotal)}).`;
         budgetWarnEl.classList.remove("hidden");
         budgetWarnEl.style.color = "var(--sb-success)";
       }
@@ -165,6 +241,37 @@
 
     resultsSection.classList.remove("hidden");
   }
+
+  /* ---------- Helpers : coûts licence & compétition ---------- */
+  function getLicenseCost(sportData, age){
+    const lic = sportData.license || {};
+    const jr  = isNum(lic.junior) ? lic.junior : null;
+    const ad  = isNum(lic.adult)  ? lic.adult  : null;
+    if(age != null){
+      if(age < 18){
+        return jr != null ? jr : (ad != null ? ad : 0);
+      } else {
+        return ad != null ? ad : (jr != null ? jr : 0);
+      }
+    }
+    return ad != null ? ad : (jr != null ? jr : 0);
+  }
+
+  function getCompetitionFee(sportData, age){
+    const comp = sportData.competition || {};
+    const jr  = isNum(comp.junior) ? comp.junior : null;  // coût PAR compétition
+    const ad  = isNum(comp.adult)  ? comp.adult  : null;
+    if(age != null){
+      if(age < 18){
+        return jr != null ? jr : (ad != null ? ad : 0);
+      } else {
+        return ad != null ? ad : (jr != null ? jr : 0);
+      }
+    }
+    return ad != null ? ad : (jr != null ? jr : 0);
+  }
+
+  function isNum(v){return typeof v === "number" && !isNaN(v);}
 
   function levelToLabel(id){
     switch(id){

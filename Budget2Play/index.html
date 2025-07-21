@@ -4,34 +4,112 @@
   <meta charset="utf-8" />
   <title>Budget2Play – Équipements & Budget par niveau</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Calculez le coût précis pour démarrer un sport selon votre niveau et découvrez les équipements nécessaires.">
+  <meta name="description" content="Calculez le coût précis pour démarrer un sport selon votre niveau visé et découvrez les équipements nécessaires." />
+
+  <!-- FAVICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="Images/logo-budget2play.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="Images/logo-budget2play.png" />
+  <link rel="shortcut icon" href="Images/logo-budget2play.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="Images/logo-budget2play.png" />
+
+  <!-- Fonts + Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- STYLE BANNIÈRE BÊTA (inline pour simplicité) -->
+  <style>
+    .sb-beta-banner{
+      width:100%;
+      background:#FFD34D;
+      color:#000;
+      text-align:center;
+      padding:0.45rem 1rem;
+      font-size:0.9rem;
+      line-height:1.35;
+      font-weight:600;
+    }
+    .sb-beta-banner span{font-weight:700;}
+    .sb-beta-banner a{
+      color:inherit;
+      text-decoration:underline;
+      font-weight:600;
+      margin-left:0.25rem;
+      margin-right:0.25rem;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .sb-beta-banner a:hover{text-decoration:none;}
+    @media (max-width:480px){
+      .sb-beta-banner{font-size:0.8rem;padding:0.5rem;}
+      .sb-beta-banner br{display:none;}
+    }
+  </style>
 </head>
 <body>
+
+  <!-- BÊTA BANNER -->
+  <div class="sb-beta-banner">
+    <span>Version bêta :</span> Les tarifs affichés sont des <strong>estimations indicatives</strong> en cours de validation. Le logiciel est un premier prototype.
+    <br>
+    Vérifiez toujours avant achat. Voir
+    <a href="#" data-section="about">Qui sommes-nous</a> •
+    <a href="#" data-section="offers">Bons</a> •
+    <a href="#" data-section="legal">Mentions</a>
+  </div>
 
   <!-- NAVIGATION -->
   <nav class="sb-topnav">
     <div class="sb-nav-inner">
-      <a href="#" class="sb-nav-logo" data-section="home">Budget2Play</a>
+      <a href="#" class="sb-nav-logo" data-section="home">
+        <img src="Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-nav" />
+      </a>
       <ul class="sb-nav-menu">
         <li><a href="#" data-section="home">Accueil</a></li>
-        <li><a href="#" data-section="estimator">Estimateur</a></li>
-        <li><a href="#" data-section="offers">Offres</a></li>
-        <li><a href="#" data-section="about">À propos</a></li>
+        <li><a href="#" data-section="estimator">Économisez sur vos sports</a></li>
+        <li><a href="#" data-section="offers">Bons de réduction</a></li>
+        <li><a href="#" data-section="about">Qui sommes-nous ?</a></li>
         <li><a href="#" data-section="legal">Mentions légales</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- ACCUEIL / HERO -->
-  <header id="home" class="sb-hero">
+  <header id="home" class="sb-hero sb-home-group">
     <div class="sb-hero-inner">
-      <h1>SportBudget devient <span class="brand-accent">Budget2Play</span></h1>
-      <p>Découvre l’équipement qu’il te faut pour démarrer n’importe quel sport — selon ton niveau, ton budget, et ton âge.</p>
+      <img src="Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-hero" />
+      <h1>Budget2Play <span class="brand-accent">arrive enfin</span></h1>
+      <p>Découvre l’équipement qu’il te faut pour démarrer n’importe quel sport — selon ton <strong>niveau visé</strong>, ton budget, et ton âge.</p>
       <a href="#" class="sb-btn-primary sb-hero-cta" data-section="estimator">Commencer mon estimation</a>
     </div>
   </header>
+
+  <!-- BLOC ACCUEIL : ACCÈS RAPIDE -->
+  <section class="sb-home-quick sb-section sb-home-group">
+    <div class="sb-container sb-home-quick-grid">
+      <article class="sb-home-card">
+        <h3>Je calcule mon budget</h3>
+        <p>Sélectionne ton sport, ton niveau visé et ton budget. Obtiens la liste d’équipements recommandés.</p>
+        <a href="#" class="sb-btn-secondary" data-section="estimator">Aller à l’estimateur</a>
+      </article>
+      <article class="sb-home-card">
+        <h3>Bons d’achats</h3>
+        <p>Codes promos négociés avec nos partenaires pour économiser sur ton matériel.</p>
+        <a href="#" class="sb-btn-secondary" data-section="offers">Voir les bons</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- BLOC ACCUEIL : ACTUALITÉS -->
+  <section class="sb-home-news sb-section sb-home-group">
+    <div class="sb-container">
+      <div class="sb-card sb-news-card">
+        <h2>Actualités</h2>
+        <ul class="sb-news-list">
+          <li><strong>Projet en phase de lancement 🚀</strong> — Nous préparons l’arrivée des premiers partenariats.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <main>
 
@@ -40,14 +118,13 @@
       <div class="sb-container">
         <!-- FORMULAIRE -->
         <form id="sb-form" class="sb-card" novalidate>
-          <h2>Votre profil</h2>
+          <h2><img src="Images/logo-budget2play.png" alt="Budget2Play" class="logo-form" /> Votre profil &amp; objectif</h2>
 
           <!-- Sport -->
           <div class="sb-field">
             <label for="sport">Sport</label>
             <select id="sport" required>
               <option value="">-- Sélectionnez --</option>
-
               <option value="athletics">Athlétisme (piste / club)</option>
               <option value="aviron">Aviron</option>
               <option value="badminton">Badminton</option>
@@ -80,9 +157,9 @@
             </select>
           </div>
 
-          <!-- Niveau -->
+          <!-- Niveau visé -->
           <div class="sb-field">
-            <label for="niveau">Niveau</label>
+            <label for="niveau">Niveau visé</label>
             <select id="niveau" required>
               <option value="debutant">Débutant</option>
               <option value="intermediaire">Intermédiaire</option>
@@ -107,12 +184,12 @@
 
         <!-- RÉSULTATS -->
         <section id="sb-results" class="sb-card sb-results hidden">
-          <h2>Équipements recommandés</h2>
+          <h2><img src="Images/logo-budget2play.png" alt="Budget2Play" class="logo-results" /> Équipements &amp; coûts estimés</h2>
           <p id="sb-results-intro"></p>
           <div id="sb-equip-list" class="sb-equip-grid"></div>
           <div id="sb-total-wrapper" class="sb-total-wrapper hidden">
             <hr />
-            <p class="sb-total-label">Total estimé :</p>
+            <p class="sb-total-label">Total équipement initial :</p>
             <p id="sb-total-amount" class="sb-total-amount"></p>
             <p id="sb-budget-warning" class="sb-budget-warning hidden"></p>
           </div>
@@ -120,29 +197,72 @@
       </div>
     </section>
 
-    <!-- OFFRES -->
+    <!-- BONS DE RÉDUCTION -->
     <section id="offers" class="sb-section hidden">
       <div class="sb-container">
         <div class="sb-card">
-          <h2>Bons de réduction & Offres</h2>
-          <p>Ici tu pourras retrouver tous les codes promos négociés avec nos partenaires (Décathlon, Ekoi, Budostore…).</p>
-          <ul class="sb-offers-list">
-            <li><strong>Code TEST10</strong> – -10% sur matériel débutant (exemple).</li>
-            <li><strong>Code VTT20</strong> – -20€ sur VTT entrée de gamme (exemple).</li>
-          </ul>
-          <p class="sb-muted small">Section à compléter.</p>
+          <h2><img src="Images/logo-budget2play.png" alt="Budget2Play" class="logo-section" /> Bons de réduction</h2>
+          <p>Ici tu pourras retrouver tous les codes promos négociés avec nos partenaires.</p>
+          <p class="sb-muted small">Section en cours de création. Recherche active de partenariats.</p>
         </div>
       </div>
     </section>
 
-    <!-- À PROPOS -->
+    <!-- QUI SOMMES-NOUS -->
     <section id="about" class="sb-section hidden">
       <div class="sb-container">
         <div class="sb-card">
-          <h2>Qui sommes-nous ?</h2>
-          <p><strong>Budget2Play</strong> (anciennement SportBudget) est un outil étudiant créé pour aider tout le monde à démarrer un sport sans surprise côté budget.</p>
-          <p>Tu sélectionnes un sport, ton niveau, et on te liste l’équipement essentiel avec estimation de coût. Nous travaillons à des partenariats pour te faire économiser avec des codes promos.</p>
-          <p class="sb-muted small">Projet étudiant – version prototype.</p>
+          <h2><img src="Images/logo-budget2play.png" alt="Budget2Play" class="logo-section" /> Qui sommes-nous ?</h2>
+
+          <p><strong>Budget2Play</strong> aide les sportifs (débutants, parents, clubs, étudiants…) à savoir <em>combien coûte vraiment</em> le démarrage d’un sport, selon le niveau visé, l’âge et le budget.</p>
+
+          <h3>Notre mission</h3>
+          <p>Réduire la barrière financière qui empêche des milliers de personnes de pratiquer un sport. En rendant les coûts visibles et en négociant des réductions, on facilite le passage à l’action.</p>
+
+          <h3>Pourquoi ce projet ?</h3>
+          <ul>
+            <li>Impossible de savoir à l’avance le coût réel d’un sport (équipement + licence + compétitions).</li>
+            <li>Beaucoup abandonnent après l’achat du matériel de base… faute de budget pour la suite.</li>
+            <li>Les familles doivent équiper plusieurs enfants : chaque euro compte.</li>
+          </ul>
+
+          <h3>Comment ça marche ?</h3>
+          <ol>
+            <li>Choisis ton sport et ton <strong>niveau visé</strong> (Débutant, Intermédiaire, Avancé).</li>
+            <li>Entre ton âge et (si tu veux) ton budget max.</li>
+            <li>On te montre l’équipement essentiel + licence club + frais compétition estimés.</li>
+            <li>Tu peux cliquer pour acheter (lien partenaire) ou comparer.</li>
+          </ol>
+
+          <h3>Ce que nous proposons</h3>
+          <ul>
+            <li>Estimations de coût par sport et niveau.</li>
+            <li>Fourchettes prix “junior / adulte”.</li>
+            <li>Bons de réduction et partenariats matériels (en cours de négociation).</li>
+            <li>Prototype gratuit, idéal pour étudiants &amp; clubs.</li>
+          </ul>
+
+          <h3>Ce que nous ne sommes pas (encore)</h3>
+          <ul>
+            <li>Pas une boutique en ligne.</li>
+            <li>Pas un comparateur exhaustif de tous les vendeurs.</li>
+            <li>Pas de collecte de données personnelles à grande échelle (phase bêta).</li>
+          </ul>
+
+          <h3>Historique rapide</h3>
+          <ul>
+            <li>Juillet 2025 : idée &amp; maquette sous le nom “Budget2Play”.</li>
+            <li>Août 2025 : prototype fonctionnel <strong>Budget2Play</strong> + premiers sports intégrés.</li>
+            <li>Prochaine étape : partenariats remises débutants &amp; packs clubs.</li>
+          </ul>
+
+          <h3>Contact</h3>
+          <p>Une idée, un partenariat, un bug ? Écris-nous :</p>
+          <ul>
+            <li>Mail : <a href="mailto:contact.budget2play@gmail.com">contact.budget2play@gmail.com</a></li>
+          </ul>
+
+          <p class="sb-muted small">Les prix sont indicatifs et peuvent varier selon les marques et les régions.</p>
         </div>
       </div>
     </section>
@@ -151,12 +271,50 @@
     <section id="legal" class="sb-section hidden">
       <div class="sb-container">
         <div class="sb-card">
-          <h2>Mentions légales</h2>
-          <p>Prototype en développement. Aucune vente directe. Les achats sont effectués auprès de partenaires tiers.</p>
-          <h3>Éditeur</h3>
-          <p>Nathan (projet étudiant). Ajouter infos lorsque structure légale créée.</p>
-          <h3>Données</h3>
-          <p>Nous ne stockons pas encore de données personnelles. En phase bêta.</p>
+          <h2><img src="Images/logo-budget2play.png" alt="Budget2Play" class="logo-section" /> Mentions légales</h2>
+
+          <p><strong>Budget2Play</strong> est un site informatif et expérimental destiné à estimer les coûts d’entrée dans différents sports. Le site est exploité à titre personnel (projet étudiant / mineur) et ne propose aucune vente directe.</p>
+
+          <h3>Éditeur du site</h3>
+          <p><strong>Budget2Play</strong> – Projet personnel.<br>
+             Responsable de publication&nbsp;: Nathan.<br>
+             Contact&nbsp;: <a href="mailto:contact.budget2play@gmail.com">contact.budget2play@gmail.com</a><br>
+             Adresse postale&nbsp;: non publiée (site édité à titre personnel). Toute demande officielle peut être transmise via l’hébergeur.</p>
+
+          <h3>Hébergement</h3>
+          <p>Site hébergé par <strong>Netlify, Inc.</strong><br>
+             2325 3rd Street, Suite 215, San Francisco, CA 94107, USA.<br>
+             Site&nbsp;: <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">netlify.com</a></p>
+
+          <h3>Finalité du site</h3>
+          <p>Fournir des estimations indicatives de coûts d’équipement, licences sportives et frais de participation à des compétitions selon un sport et un niveau visé. Les prix sont estimatifs, non contractuels et peuvent varier selon magasins, régions, promotions ou évolutions de marché.</p>
+
+          <h3>Absence d’offre commerciale directe</h3>
+          <p>Budget2Play ne vend aucun produit ou service sur ce site. Les liens vers des marchands ou partenaires sont fournis à titre d’information. Les achats se font exclusivement sur des sites tiers sous leur responsabilité.</p>
+
+          <h3>Données personnelles &amp; cookies</h3>
+          <p>Nous ne collectons pas de données saisies par les visiteurs (pas de création de compte, pas de formulaire utilisateur stocké côté serveur).</p>
+          <p>Ce site utilise toutefois un outil de mesure d’audience&nbsp;: <strong>Google Analytics (GA4)</strong>. Cet outil peut déposer des cookies de mesure statistique. Une configuration d’anonymisation IP est activée. Les données sont utilisées pour comprendre l’usage du site (pages vues, types d’appareil, zones géographiques approximatives) et améliorer le service.</p>
+          <p>Vous pouvez&nbsp;:</p>
+          <ul>
+            <li>Configurer votre navigateur pour refuser les cookies.</li>
+            <li>Installer l’extension de désactivation Google Analytics proposée par Google.</li>
+          </ul>
+
+          <h3>Droits des utilisateurs</h3>
+          <p>Pour toute question sur les données ou pour demander suppression de données d’analyse associables (si applicable), écrivez-nous à&nbsp;: <a href="mailto:contact.budget2play@gmail.com">contact.budget2play@gmail.com</a>.</p>
+
+          <h3>Propriété intellectuelle</h3>
+          <p>Logo, identité visuelle et contenus textes du site Budget2Play sont fournis dans le cadre du prototype. Toute réutilisation à titre non commercial est tolérée avec attribution “Source&nbsp;: Budget2Play”. Une utilisation commerciale, reproduction de masse ou intégration marque nécessite autorisation préalable par email.</p>
+
+          <h3>Liens externes</h3>
+          <p>Les liens vers d’autres sites (marchands, clubs, fédérations…) sont fournis pour votre commodité. Budget2Play n’exerce aucun contrôle sur leur contenu et décline toute responsabilité concernant leur exactitude, disponibilité ou conformité.</p>
+
+          <h3>Limitation de responsabilité</h3>
+          <p>Les informations (prix, niveaux, équipements) sont fournies à titre indicatif, sans garantie d’exactitude ou d’exhaustivité. Avant tout achat, vérifiez les tarifs réels auprès d’un vendeur ou d’un club local.</p>
+
+          <h3>Modification des mentions</h3>
+          <p>Ces mentions peuvent évoluer à mesure que le projet progresse (création d’une structure, partenariats, collecte de données). Dernière mise à jour&nbsp;: juillet&nbsp;2025.</p>
         </div>
       </div>
     </section>
@@ -164,11 +322,29 @@
   </main>
 
   <footer class="sb-footer">
+    <img src="Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-footer" />
     <p>© 2025 Budget2Play – Prototype éducatif.</p>
+    <p class="sb-footer-contact">
+      <span class="sb-mail-icon" aria-hidden="true">📧</span>
+      <span>contact.budget2play@gmail.com</span>
+      ·
+      <a href="#" id="manage-cookies-link">Gérer mes cookies</a>
+    </p>
   </footer>
 
   <!-- DONNÉES puis LOGIQUE -->
-  <script src="equipment-data.js"></script>
-  <script src="app.js"></script>
+  <script src="equipment-data.js" defer></script>
+  <script src="app.js" defer></script>
+
+  <!-- COOKIE BANNER (affiché via JS si consentement non exprimé) -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Choix cookies">
+    <p>Ce site utilise des cookies (Google Analytics) pour améliorer l'expérience.</p>
+    <div class="cookie-banner-btns">
+      <button id="accept-cookies" type="button">Accepter</button>
+      <button id="reject-cookies" type="button">Refuser</button>
+    </div>
+  </div>
+
+  <script src="cookies.js" defer></script>
 </body>
 </html>
