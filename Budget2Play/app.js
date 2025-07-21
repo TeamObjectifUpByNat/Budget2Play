@@ -16,6 +16,14 @@
 
 (function(){
 
+  // Vérifie si le popup cookies a déjà été accepté/refusé
+if (!localStorage.getItem('cookiesConsent')) {
+  const script = document.createElement('script');
+  script.src = 'cookie-popup.js';
+  document.body.appendChild(script);
+}
+
+
   /* ---------- NAVIGATION ---------- */
   const sections = {
     home: document.getElementById("home"),

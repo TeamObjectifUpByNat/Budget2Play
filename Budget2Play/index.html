@@ -99,6 +99,17 @@
     </div>
   </section>
 
+  <!-- BLOC ACCUEIL : AVIS / FORMULAIRE -->
+  <section class="sb-home-feedback sb-section sb-home-group">
+    <div class="sb-container">
+      <div class="sb-card sb-feedback-card">
+        <h2>Ton avis compte !</h2>
+        <p>Aide-nous à améliorer Budget2Play. Dis-nous ce que tu penses du prototype (simplicité, sports manquants, prix…)</p>
+        <a class="sb-btn-feedback" href="https://forms.gle/ccngzq7hhq8z5oB79" target="_blank" rel="noopener noreferrer">Donner mon avis</a>
+      </div>
+    </div>
+  </section>
+
   <!-- BLOC ACCUEIL : ACTUALITÉS -->
   <section class="sb-home-news sb-section sb-home-group">
     <div class="sb-container">
@@ -294,7 +305,7 @@
 
           <h3>Données personnelles &amp; cookies</h3>
           <p>Nous ne collectons pas de données saisies par les visiteurs (pas de création de compte, pas de formulaire utilisateur stocké côté serveur).</p>
-          <p>Ce site utilise toutefois un outil de mesure d’audience&nbsp;: <strong>Google Analytics (GA4)</strong>. Cet outil peut déposer des cookies de mesure statistique. Une configuration d’anonymisation IP est activée. Les données sont utilisées pour comprendre l’usage du site (pages vues, types d’appareil, zones géographiques approximatives) et améliorer le service.</p>
+          <p>Ce site utilise toutefois un outil de mesure d’audience&nbsp;: <strong>Google Analytics (GA4)</strong>. Cet outil peut déposer des cookies de mesure statistique. Une configuration d’anonymisation IP est activée. Les données sont utilisées pour comprendre l’usage du site (pages vues, appareils, zones géographiques approximatives) et améliorer le service.</p>
           <p>Vous pouvez&nbsp;:</p>
           <ul>
             <li>Configurer votre navigateur pour refuser les cookies.</li>
@@ -328,6 +339,8 @@
       <span class="sb-mail-icon" aria-hidden="true">📧</span>
       <span>contact.budget2play@gmail.com</span>
       ·
+      <a href="https://www.instagram.com/budget2play/" target="_blank" rel="noopener noreferrer" class="sb-footer-social sb-footer-ig">Instagram de budget2play</a>
+      ·
       <a href="#" id="manage-cookies-link">Gérer mes cookies</a>
     </p>
   </footer>
@@ -336,15 +349,22 @@
   <script src="equipment-data.js" defer></script>
   <script src="app.js" defer></script>
 
-  <!-- COOKIE BANNER (affiché via JS si consentement non exprimé) -->
-  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Choix cookies">
-    <p>Ce site utilise des cookies (Google Analytics) pour améliorer l'expérience.</p>
-    <div class="cookie-banner-btns">
-      <button id="accept-cookies" type="button">Accepter</button>
-      <button id="reject-cookies" type="button">Refuser</button>
+  <!-- FULLSCREEN COOKIE MODAL (invisible until JS shows it) -->
+  <div id="cookie-modal-backdrop" class="cookie-modal-backdrop" hidden>
+    <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+      <h2 id="cookie-modal-title">Gestion des cookies</h2>
+      <p>Budget2Play utilise un cookie de mesure d’audience (Google Analytics) pour améliorer le service. Aucune donnée personnelle nominative n’est collectée.</p>
+      <p>Acceptez-vous le cookie de mesure ?</p>
+      <div class="cookie-modal-actions">
+        <button type="button" id="cookie-accept-btn" class="cookie-accept-btn">Accepter</button>
+        <button type="button" id="cookie-reject-btn" class="cookie-reject-btn">Refuser</button>
+      </div>
+      <button type="button" id="cookie-close-btn" class="cookie-close-btn" aria-label="Fermer la fenêtre">&times;</button>
+      <p class="cookie-more-link"><a href="#" data-section="legal" class="cookie-legal-link">Mentions légales &amp; données</a></p>
     </div>
   </div>
 
+  <!-- Consent / GA loader -->
   <script src="cookies.js" defer></script>
 </body>
 </html>
