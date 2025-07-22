@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Calculez le coût précis pour démarrer un sport selon votre niveau visé et découvrez les équipements nécessaires." />
 
-  <!-- FAVICONS (chemins relatifs) -->
+  <!-- FAVICONS -->
   <link rel="icon" type="image/png" sizes="32x32" href="Images/logo-budget2play.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="Images/logo-budget2play.png" />
   <link rel="shortcut icon" href="Images/logo-budget2play.png" />
@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- STYLE BANNIÈRE BÊTA (inline) -->
+  <!-- STYLE BANNIÈRE BÊTA (inline pour simplicité) -->
   <style>
     .sb-beta-banner{
       width:100%;
@@ -345,7 +345,11 @@
     </p>
   </footer>
 
-  <!-- FULLSCREEN COOKIE MODAL -->
+  <!-- DONNÉES puis LOGIQUE -->
+  <script src="equipment-data.js" defer></script>
+  <script src="app.js" defer></script>
+
+  <!-- FULLSCREEN COOKIE MODAL (fallback if you ever need it) -->
   <div id="cookie-modal-backdrop" class="cookie-modal-backdrop" hidden>
     <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
       <h2 id="cookie-modal-title">Gestion des cookies</h2>
@@ -355,14 +359,12 @@
         <button type="button" id="cookie-accept-btn" class="cookie-accept-btn">Accepter</button>
         <button type="button" id="cookie-reject-btn" class="cookie-reject-btn">Refuser</button>
       </div>
-      <!-- Pas de bouton fermer (obligation de choisir) -->
+      <button type="button" id="cookie-close-btn" class="cookie-close-btn" aria-label="Fermer la fenêtre">&times;</button>
       <p class="cookie-more-link"><a href="#" data-section="legal" class="cookie-legal-link">Mentions légales &amp; données</a></p>
     </div>
   </div>
 
-  <!-- DONNÉES + LOGIQUE -->
-  <script src="equipment-data.js" defer></script>
-  <script src="app.js" defer></script>
+  <!-- Consent / GA loader -->
   <script src="cookies.js" defer></script>
 </body>
 </html>
