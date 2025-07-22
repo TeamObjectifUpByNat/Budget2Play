@@ -1,73 +1,131 @@
+/* ============================================================
+   cookies.js – Gestion consentement + Google Analytics
+   ------------------------------------------------------------
+   Flux :
+     - Au chargement : vérifie localStorage['cookiesConsent']
+       -> pas de valeur => affiche le modal plein écran
+       -> accepted => charge GA
+       -> declined => ne charge rien
+     - Bouton "Gérer mes cookies" (footer) => ré-ouvre le modal
+     - Aucune fermeture sans choisir (pas de X)
+   ============================================================ */
+
 (function(){
-  // Création du fond noir semi-transparent
-  const overlay = document.createElement('div');
-  overlay.id = 'cookie-overlay';
-  Object.assign(overlay.style, {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.6)',
-    zIndex: '9998',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+  const CONSENT_KEY = 'cookiesConsent';
+  const ACCEPTED    = 'accepted';
+  const DECLINED    = 'declined';
+
+  // Éléments du modal (déjà dans index.html)
+  const backdrop  = document.getElementById('cookie-modal-backdrop');
+  const acceptBtn = document.getElementById('cookie-accept-btn');
+  const rejectBtn = document.getElementById('cookie-reject-btn');
+  const manageLink = document.getElementById('manage-cookies-link');
+  // (facultatif) liens internes vers la section Mentions légales
+  const legalLinks = document.querySelectorAll('.cookie-legal-link');
+
+  /* ---------- Fonctions ---------- */
+  function showModal(){
+    if(!backdrop) return;
+    backdrop.hidden = false;
+    document.documentElement.classList.add('cookie-modal-open');
+    document.body.classList.add('cookie-modal-open');
+  }
+
+  function hideModal(){
+    if(!backdrop) return;
+    backdrop.hidden = true;
+    document.documentElement.classList.remove('cookie-modal-open');
+    document.body.classList.remove('cookie-modal-open');
+  }
+
+  // Charge GA4 dynamiquement si pas déjà chargé
+  function loadGoogleAnalytics(){
+    if(window.__b2p_ga_loaded) return; // éviter doublon
+    window.__b2p_ga_loaded = true;
+
+    const GA_ID = 'G-XXXXXXXX'; // <<< REMPLACE par ton ID GA4
+
+    // Script ga
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(gaScript);
+
+    gaScript.onload = ()=>{
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', GA_ID, {
+        anonymize_ip: true
+      });
+    };
+  }
+
+  function setConsent(value){
+    try {
+      localStorage.setItem(CONSENT_KEY, value);
+    } catch(_) {}
+  }
+
+  function getConsent(){
+    try {
+      return localStorage.getItem(CONSENT_KEY);
+    } catch(_) {
+      return null;
+    }
+  }
+
+  function handleAccept(){
+    setConsent(ACCEPTED);
+    hideModal();
+    loadGoogleAnalytics();
+  }
+
+  function handleReject(){
+    setConsent(DECLINED);
+    hideModal();
+    // Pas de GA
+  }
+
+  /* ---------- Listeners ---------- */
+  if(acceptBtn){
+    acceptBtn.addEventListener('click', handleAccept);
+  }
+  if(rejectBtn){
+    rejectBtn.addEventListener('click', handleReject);
+  }
+
+  if(manageLink){
+    manageLink.addEventListener('click', (e)=>{
+      e.preventDefault();
+      showModal();
+    });
+  }
+
+  // Si on clique sur un des liens "Mentions légales & données" dans le modal -> navigue vers section
+  if(legalLinks && legalLinks.length){
+    legalLinks.forEach(l=>{
+      l.addEventListener('click', (e)=>{
+        // Laisser app.js gérer la navigation (data-section="legal")
+        hideModal();
+      });
+    });
+  }
+
+  /* ---------- Init au chargement ---------- */
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const stored = getConsent();
+    if(stored === ACCEPTED){
+      loadGoogleAnalytics();
+      hideModal(); // s’assure que c’est bien caché
+    } else if(stored === DECLINED){
+      hideModal();
+      // Rien à charger
+    } else {
+      // Pas de choix => afficher
+      showModal();
+    }
   });
 
-  // Création du conteneur du popup
-  const popup = document.createElement('div');
-  popup.id = 'cookie-popup';
-  Object.assign(popup.style, {
-    background: '#fff',
-    padding: '2rem',
-    borderRadius: '12px',
-    maxWidth: '420px',
-    textAlign: 'center',
-    boxShadow: '0 0 20px rgba(0,0,0,0.3)',
-    fontFamily: 'Arial, sans-serif',
-    zIndex: '9999'
-  });
-
-  popup.innerHTML = `
-    <h2 style="margin-bottom: 1rem;">Cookies</h2>
-    <p style="font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.4;">
-      Nous utilisons des cookies pour améliorer votre expérience. <br>
-      Acceptez-vous ?
-    </p>
-    <div style="display: flex; gap: 1rem; justify-content: center;">
-      <button id="cookie-accept" style="
-        padding: 0.5rem 1rem;
-        background: #4CAF50;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-      ">Accepter</button>
-      <button id="cookie-decline" style="
-        padding: 0.5rem 1rem;
-        background: #f44336;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-      ">Refuser</button>
-    </div>
-  `;
-
-  overlay.appendChild(popup);
-  document.body.appendChild(overlay);
-
-  // Gestion des boutons
-  document.getElementById('cookie-accept').addEventListener('click', () => {
-    localStorage.setItem('cookiesConsent', 'accepted');
-    overlay.remove();
-  });
-
-  document.getElementById('cookie-decline').addEventListener('click', () => {
-    localStorage.setItem('cookiesConsent', 'declined');
-    overlay.remove();
-  });
 })();

@@ -9,31 +9,23 @@
    - Données lues depuis window.SPORTS_EQUIPMENT :
        license:     { junior:<€>, adult:<€> }
        competition: { junior:<€> (par compétition), adult:<€> }
-   - Comparaison budget basée sur le TOTAL SAISON (équipement + licence + compétitions)
-   - FIX : masque les blocs Accueil supplémentaires (hero + quick + news)
+   - Comparaison budget = TOTAL SAISON (équipement + licence + compétitions)
+   - Masque les blocs Accueil supplémentaires (hero + quick + news)
      quand on change de section.
    ============================================================ */
 
 (function(){
 
-  // Vérifie si le popup cookies a déjà été accepté/refusé
-if (!localStorage.getItem('cookiesConsent')) {
-  const script = document.createElement('script');
-  script.src = 'cookie-popup.js';
-  document.body.appendChild(script);
-}
-
-
   /* ---------- NAVIGATION ---------- */
   const sections = {
-    home: document.getElementById("home"),
+    home:      document.getElementById("home"),
     estimator: document.getElementById("estimator"),
-    offers: document.getElementById("offers"),
-    about: document.getElementById("about"),
-    legal: document.getElementById("legal")
+    offers:    document.getElementById("offers"),
+    about:     document.getElementById("about"),
+    legal:     document.getElementById("legal")
   };
 
-  // Tous les blocs de la page d'accueil (hero, accès rapide, news)
+  // Tous les blocs de la page d'accueil (hero, accès rapide, news, feedback, etc.)
   const homeGroupEls = document.querySelectorAll('.sb-home-group');
 
   const navLinks = document.querySelectorAll('[data-section]');
@@ -98,9 +90,9 @@ if (!localStorage.getItem('cookiesConsent')) {
 
   // Nombre de compétitions / an selon niveau
   const COMP_PER_LEVEL = {
-    debutant: 0,
-    intermediaire: 5,
-    avance: 10
+    debutant:       0,
+    intermediaire:  5,
+    avance:        10
   };
 
   formEl.addEventListener("submit", (e)=>{
@@ -173,6 +165,8 @@ if (!localStorage.getItem('cookiesConsent')) {
       const card = document.createElement("div");
       card.className = "sb-equip-card";
 
+      // IMPORTANT : si l'item référence une image, elle doit être relative au dossier du site
+      // Exemple attendu dans equipment-data.js : "Images/chaussures-running-debut.png"
       const imgSrc = obj.img && obj.img.trim() ? obj.img : "https://via.placeholder.com/300x200?text=Image";
       const safeLink = obj.link && obj.link.trim() ? obj.link : "#";
 

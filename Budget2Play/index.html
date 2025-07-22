@@ -6,16 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Calculez le coût précis pour démarrer un sport selon votre niveau visé et découvrez les équipements nécessaires." />
 
-  <!-- FAVICONS -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/budget2play/Images/logo-budget2play.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/budget2play/Images/logo-budget2play.png" />
-  <link rel="shortcut icon" href="/budget2play/Images/logo-budget2play.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/budget2play/Images/logo-budget2play.png" />
+  <!-- FAVICONS (chemins relatifs) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="Images/logo-budget2play.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="Images/logo-budget2play.png" />
+  <link rel="shortcut icon" href="Images/logo-budget2play.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="Images/logo-budget2play.png" />
 
   <!-- Fonts + Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/budget2play/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 
+  <!-- STYLE BANNIÈRE BÊTA (inline) -->
   <style>
     .sb-beta-banner{
       width:100%;
@@ -46,6 +47,7 @@
 </head>
 <body>
 
+  <!-- BÊTA BANNER -->
   <div class="sb-beta-banner">
     <span>Version bêta :</span> Les tarifs affichés sont des <strong>estimations indicatives</strong> en cours de validation. Le logiciel est un premier prototype.
     <br>
@@ -55,10 +57,11 @@
     <a href="#" data-section="legal">Mentions</a>
   </div>
 
+  <!-- NAVIGATION -->
   <nav class="sb-topnav">
     <div class="sb-nav-inner">
       <a href="#" class="sb-nav-logo" data-section="home">
-        <img src="/budget2play/Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-nav" />
+        <img src="Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-nav" />
       </a>
       <ul class="sb-nav-menu">
         <li><a href="#" data-section="home">Accueil</a></li>
@@ -70,18 +73,15 @@
     </div>
   </nav>
 
+  <!-- ACCUEIL / HERO -->
   <header id="home" class="sb-hero sb-home-group">
     <div class="sb-hero-inner">
-      <img src="/budget2play/Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-hero" />
+      <img src="Images/logo-budget2play.png" alt="Budget2Play Logo" class="logo-hero" />
       <h1>Budget2Play <span class="brand-accent">arrive enfin</span></h1>
       <p>Découvre l’équipement qu’il te faut pour démarrer n’importe quel sport — selon ton <strong>niveau visé</strong>, ton budget, et ton âge.</p>
       <a href="#" class="sb-btn-primary sb-hero-cta" data-section="estimator">Commencer mon estimation</a>
     </div>
   </header>
-
-</body>
-</html>
-
 
   <!-- BLOC ACCUEIL : ACCÈS RAPIDE -->
   <section class="sb-home-quick sb-section sb-home-group">
@@ -345,11 +345,7 @@
     </p>
   </footer>
 
-  <!-- DONNÉES puis LOGIQUE -->
-  <script src="equipment-data.js" defer></script>
-  <script src="app.js" defer></script>
-
-  <!-- FULLSCREEN COOKIE MODAL (invisible until JS shows it) -->
+  <!-- FULLSCREEN COOKIE MODAL -->
   <div id="cookie-modal-backdrop" class="cookie-modal-backdrop" hidden>
     <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
       <h2 id="cookie-modal-title">Gestion des cookies</h2>
@@ -359,12 +355,14 @@
         <button type="button" id="cookie-accept-btn" class="cookie-accept-btn">Accepter</button>
         <button type="button" id="cookie-reject-btn" class="cookie-reject-btn">Refuser</button>
       </div>
-      <button type="button" id="cookie-close-btn" class="cookie-close-btn" aria-label="Fermer la fenêtre">&times;</button>
+      <!-- Pas de bouton fermer (obligation de choisir) -->
       <p class="cookie-more-link"><a href="#" data-section="legal" class="cookie-legal-link">Mentions légales &amp; données</a></p>
     </div>
   </div>
 
-  <!-- Consent / GA loader -->
+  <!-- DONNÉES + LOGIQUE -->
+  <script src="equipment-data.js" defer></script>
+  <script src="app.js" defer></script>
   <script src="cookies.js" defer></script>
 </body>
 </html>
